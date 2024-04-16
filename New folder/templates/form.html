@@ -1,0 +1,333 @@
+<!-- templates/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project Form</h1>
+    <form method="POST" action="{{ url_for('submit_form') }}" id="projectForm">
+        <div id="userFields">
+            <!-- Client Details -->
+            <label for="client_name">Client Name:</label><br>
+            <input type="text" id="client_name" name="client_name" value="Abc NHS Trust"><br>
+
+            <label for="project_name">Project Name:</label><br>
+            <input type="text" id="project_name" name="project_name" value="EPR Deployment"><br>
+
+            <label for="project_reference">Project Reference:</label><br>
+            <input type="text" id="project_reference" name="project_reference" value="EPR240202/01"><br>
+
+            <label for="client_contact_name">Client Contact Name:</label><br>
+            <input type="text" id="client_contact_name" name="client_contact_name" value="Masud Rana"><br>
+
+            <label for="client_contact_email">Client Contact Email:</label><br>
+            <input type="email" id="client_contact_email" name="client_contact_email" value="Masud@gmail.com"><br>
+
+            <!-- Project Details -->
+            <label for="project_description">Project Description:</label><br>
+            <textarea id="project_description" name="project_description">Long text</textarea><br>
+
+            <label for="project_deliverables">Project Deliverables:</label><br>
+            <textarea id="project_deliverables" name="project_deliverables">Long texts</textarea><br>
+
+            <label for="project_start_date">Project Start Date:</label><br>
+            <input type="date" id="project_start_date" name="project_start_date" value="2024-03-01"><br>
+
+            <label for="project_end_date">Project End Date:</label><br>
+            <input type="date" id="project_end_date" name="project_end_date" value="2024-08-31"><br>
+
+            <label for="duration_in_days">Duration in Days:</label><br>
+            <input type="number" id="duration_in_days" name="duration_in_days" value="120"><br>
+
+            <!-- Consultant Details -->
+            <label for="consultants_requirement_details">Consultants Requirement Details:</label><br>
+            <textarea id="consultants_requirement_details" name="consultants_requirement_details">Long text</textarea><br>
+
+            <label for="number_of_consultants_required">Number of Consultants Required:</label><br>
+            <input type="number" id="number_of_consultants_required" name="number_of_consultants_required" value="4"><br>
+
+            <label for="consultant_phone_number">Consultant Phone Number:</label><br>
+            <input type="tel" id="consultant_phone_number" name="consultant_phone_number" value="07529466289"><br>
+
+            <!-- User and Work Assignment Fields -->
+            <fieldset class="userFieldset">
+                <legend>User 1</legend>
+                <!-- User Details -->
+                <label for="name_1">Name:</label><br>
+                <input type="text" id="name_1" name="name_1" value="Masud Rana Cons"><br>
+
+                <label for="phone_number_1">Phone Number:</label><br>
+                <input type="tel" id="phone_number_1" name="phone_number_1" value="01234567890"><br>
+
+                <label for="company_name_1">Company Name:</label><br>
+                <input type="text" id="company_name_1" name="company_name_1" value="LLC"><br>
+
+                <label for="company_reg_number_1">Company Registration Number:</label><br>
+                <input type="text" id="company_reg_number_1" name="company_reg_number_1" value="#123abc"><br>
+
+                <label for="address_1">Address:</label><br>
+                <input type="text" id="address_1" name="address_1" value="#123abc"><br>
+
+                <label for="emp_id_1">Employee ID:</label><br>
+                <input type="text" id="emp_id_1" name="emp_id_1" value="124"><br>
+
+                <label for="daily_rate_1">Daily Rate (Wage):</label><br>
+                <input type="number" id="daily_rate_1" name="daily_rate_1" value="50"><br>
+
+                <label for="email_1">Email:</label><br>
+                <input type="email" id="email_1" name="email_1" value="abc@gmail.com"><br>
+
+                <!-- Work Assignment Details -->
+                <fieldset class="workAssignment">
+                    <legend>Work Assignment</legend>
+
+                    <label for="delivery_report_date_1">Delivery Report for Consultant Date:</label><br>
+                    <input type="date" id="delivery_report_date_1" name="delivery_report_date_1"><br>
+
+                    <label for="project_number_1">Project Number:</label><br>
+                    <input type="text" id="project_number_1" name="project_number_1"><br>
+
+                    <label for="client_1">Client:</label><br>
+                    <input type="text" id="client_1" name="client_1"><br>
+
+                    <label for="name_1">Name:</label><br>
+                    <input type="text" id="name_1" name="name_1"><br>
+
+                    <label for="directorate_1">Directorate:</label><br>
+                    <input type="text" id="directorate_1" name="directorate_1"><br>
+
+                    <label for="consultancy_1">Consultancy:</label><br>
+                    <input type="text" id="consultancy_1" name="consultancy_1"><br>
+
+                    <label for="programme_area_1">Programme Area:</label><br>
+                    <input type="text" id="programme_area_1" name="programme_area_1"><br>
+
+                    <label for="total_days_delivered_1">Total number of days delivered (this month):</label><br>
+                    <input type="number" id="total_days_delivered_1" name="total_days_delivered_1"><br>
+
+                    <label for="deliverables_status_1">Overall deliverables on track/off track:</label><br>
+                    <select id="deliverables_status_1" name="deliverables_status_1">
+                        <option value="ON TRACK">ON TRACK</option>
+                        <option value="OFF TRACK">OFF TRACK</option>
+                    </select><br>
+
+                    <label for="delivery_areas_1">Delivery Areas (from Consultancy Contract):</label><br>
+                    <textarea id="delivery_areas_1" name="delivery_areas_1"></textarea><br>
+
+                    <!-- Add other fields as needed -->
+                    <label for="total_days_allocated_1">Total Days Allocated:</label><br>
+                    <input type="number" id="total_days_allocated_1" name="total_days_allocated_1"><br>
+
+                    <label for="feb_days_1">Feb Days:</label><br>
+                    <input type="number" id="feb_days_1" name="feb_days_1"><br>
+
+                    <label for="mar_days_1">Mar Days:</label><br>
+                    <input type="number" id="mar_days_1" name="mar_days_1"><br>
+
+                    <label for="apr_days_1">Apr Days:</label><br>
+                    <input type="number" id="apr_days_1" name="apr_days_1"><br>
+
+                    <label for="may_days_1">May Days:</label><br>
+                    <input type="number" id="may_days_1" name="may_days_1"><br>
+
+                    <label for="june_days_1">June Days:</label><br>
+                    <input type="number" id="june_days_1" name="june_days_1"><br>
+
+                    <label for="remaining_days_1">Remaining Days:</label><br>
+                    <input type="number" id="remaining_days_1" name="remaining_days_1"><br>
+
+                    <label for="delivery_areas_details_1">Delivery Areas Details:</label><br>
+                    <textarea id="delivery_areas_details_1" name="delivery_areas_details_1"></textarea><br>
+
+                    <label for="comments_1">Comments:</label><br>
+                    <textarea id="comments_1" name="comments_1"></textarea><br>
+
+                    <label for="dependencies_1">Relevant dependencies on ability to deliver:</label><br>
+                    <input type="text" id="dependencies_1" name="dependencies_1"><br>
+
+                    <label for="rag_1">RAG:</label><br>
+                    <input type="text" id="rag_1" name="rag_1"><br>
+
+                    <label for="output_1">Delivered this period – February 2023 (Output):</label><br>
+                    <input type="text" id="output_1" name="output_1"><br>
+                </fieldset>
+            </fieldset>
+        </div>
+        <button type="button" id="addUserButton">Add User</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addUserButton = document.getElementById('addUserButton');
+            const userFieldsContainer = document.getElementById('userFields');
+            let userCount = 1; // Initial user count
+
+            addUserButton.addEventListener('click', function() {
+                userCount++;
+                const newFieldset = document.createElement('fieldset');
+                newFieldset.className = 'userFieldset';
+                newFieldset.innerHTML = `
+                    <legend>User ${userCount}</legend>
+                    <label for="name_${userCount}">Name:</label><br>
+                    <input type="text" id="name_${userCount}" name="name_${userCount}" value=""><br>
+
+                    <label for="phone_number_${userCount}">Phone Number:</label><br>
+                    <input type="tel" id="phone_number_${userCount}" name="phone_number_${userCount}" value=""><br>
+
+                    <label for="company_name_${userCount}">Company Name:</label><br>
+                    <input type="text" id="company_name_${userCount}" name="company_name_${userCount}" value=""><br>
+
+                    <label for="company_reg_number_${userCount}">Company Registration Number:</label><br>
+                    <input type="text" id="company_reg_number_${userCount}" name="company_reg_number_${userCount}" value=""><br>
+
+                    <label for="address_${userCount}">Address:</label><br>
+                    <input type="text" id="address_${userCount}" name="address_${userCount}" value=""><br>
+
+                    <label for="emp_id_${userCount}">Employee ID:</label><br>
+                    <input type="text" id="emp_id_${userCount}" name="emp_id_${userCount}" value=""><br>
+
+                    <label for="daily_rate_${userCount}">Daily Rate (Wage):</label><br>
+                    <input type="number" id="daily_rate_${userCount}" name="daily_rate_${userCount}" value=""><br>
+
+                    <label for="email_${userCount}">Email:</label><br>
+                    <input type="email" id="email_${userCount}" name="email_${userCount}" value=""><br>
+                `;
+
+                const newWorkAssignmentFieldset = document.createElement('fieldset');
+                newWorkAssignmentFieldset.className = 'workAssignment';
+                newWorkAssignmentFieldset.innerHTML = `
+                    <legend>Work Assignment</legend>
+                   <legend>Work Assignment</legend>
+<label for="delivery_report_date_${userCount}">Delivery Report for Consultant Date:</label><br>
+<input type="date" id="delivery_report_date_${userCount}" name="delivery_report_date_${userCount}"><br>
+
+<label for="project_number_${userCount}">Project Number:</label><br>
+<input type="text" id="project_number_${userCount}" name="project_number_${userCount}"><br>
+
+<label for="client_${userCount}">Client:</label><br>
+<input type="text" id="client_${userCount}" name="client_${userCount}"><br>
+
+<label for="name_${userCount}">Name:</label><br>
+<input type="text" id="name_${userCount}" name="name_${userCount}"><br>
+
+<label for="directorate_${userCount}">Directorate:</label><br>
+<input type="text" id="directorate_${userCount}" name="directorate_${userCount}"><br>
+
+<label for="consultancy_${userCount}">Consultancy:</label><br>
+<input type="text" id="consultancy_${userCount}" name="consultancy_${userCount}"><br>
+
+<label for="programme_area_${userCount}">Programme Area:</label><br>
+<input type="text" id="programme_area_${userCount}" name="programme_area_${userCount}"><br>
+
+<label for="total_days_delivered_${userCount}">Total number of days delivered (this month):</label><br>
+<input type="number" id="total_days_delivered_${userCount}" name="total_days_delivered_${userCount}"><br>
+
+<label for="deliverables_status_${userCount}">Overall deliverables on track/off track:</label><br>
+<select id="deliverables_status_${userCount}" name="deliverables_status_${userCount}">
+    <option value="ON TRACK">ON TRACK</option>
+    <option value="OFF TRACK">OFF TRACK</option>
+</select><br>
+
+<label for="delivery_areas_${userCount}">Delivery Areas (from Consultancy Contract):</label><br>
+<textarea id="delivery_areas_${userCount}" name="delivery_areas_${userCount}"></textarea><br>
+
+<!-- Add other fields as needed -->
+<label for="total_days_allocated_${userCount}">Total Days Allocated:</label><br>
+<input type="number" id="total_days_allocated_${userCount}" name="total_days_allocated_${userCount}"><br>
+
+<label for="feb_days_${userCount}">Feb Days:</label><br>
+<input type="number" id="feb_days_${userCount}" name="feb_days_${userCount}"><br>
+
+<label for="mar_days_${userCount}">Mar Days:</label><br>
+<input type="number" id="mar_days_${userCount}" name="mar_days_${userCount}"><br>
+
+<label for="apr_days_${userCount}">Apr Days:</label><br>
+<input type="number" id="apr_days_${userCount}" name="apr_days_${userCount}"><br>
+
+<label for="may_days_${userCount}">May Days:</label><br>
+<input type="number" id="may_days_${userCount}" name="may_days_${userCount}"><br>
+
+<label for="june_days_${userCount}">June Days:</label><br>
+<input type="number" id="june_days_${userCount}" name="june_days_${userCount}"><br>
+
+<label for="remaining_days_${userCount}">Remaining Days:</label><br>
+<input type="number" id="remaining_days_${userCount}" name="remaining_days_${userCount}"><br>
+
+<label for="delivery_areas_details_${userCount}">Delivery Areas Details:</label><br>
+<textarea id="delivery_areas_details_${userCount}" name="delivery_areas_details_${userCount}"></textarea><br>
+
+<label for="comments_${userCount}">Comments:</label><br>
+<textarea id="comments_${userCount}" name="comments_${userCount}"></textarea><br>
+
+<label for="dependencies_${userCount}">Relevant dependencies on ability to deliver:</label><br>
+<input type="text" id="dependencies_${userCount}" name="dependencies_${userCount}"><br>
+
+<label for="rag_${userCount}">RAG:</label><br>
+<input type="text" id="rag_${userCount}" name="rag_${userCount}"><br>
+
+<label for="output_${userCount}">Delivered this period – February 2023 (Output):</label><br>
+<input type="text" id="output_${userCount}" name="output_${userCount}"><br>
+                `;
+
+                newFieldset.appendChild(newWorkAssignmentFieldset);
+                userFieldsContainer.appendChild(newFieldset);
+            });
+        });
+    </script>
+</body>
+</html>

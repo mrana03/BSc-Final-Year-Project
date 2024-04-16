@@ -1,0 +1,243 @@
+<!-- consultant_dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Report for Consultant</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Heading styles */
+        h1, h2, h3 {
+            color: #007BFF;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* Textarea styles */
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            resize: vertical;
+        }
+
+        /* Button styles */
+        #update-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #update-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Editable field styles */
+        .editable-field {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delivery Report for Consultant</h1>
+    <h2>{{ month }}</h2>
+
+    <h3>Consultancy Details</h3>
+    <table>
+        <tr>
+            <th>Project Number</th>
+            <td>{{ consultancy_details.project_number }}</td>
+        </tr>
+        <tr>
+            <th>Client</th>
+            <td>{{ consultancy_details.client }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ consultancy_details.name }}</td>
+        </tr>
+        <tr>
+            <th>Directorate</th>
+            <td>{{ consultancy_details.directorate }}</td>
+        </tr>
+        <tr>
+            <th>Consultancy</th>
+            <td>{{ consultancy_details.consultancy }}</td>
+        </tr>
+        <tr>
+            <th>Programme area</th>
+            <td>{{ consultancy_details.programme_area }}</td>
+        </tr>
+        <tr>
+            <th>Total number of days delivered (this month)</th>
+            <td>{{ delivery_metrics.total_days_delivered }}</td>
+        </tr>
+        <tr>
+            <th>Overall deliverables on track/off track</th>
+            <td>{{ delivery_metrics.overall_deliverables_status }}</td>
+        </tr>
+    </table>
+
+    <h3>Agreed deliverables for the consultancy (as per consultancy agreement/change notice)</h3>
+    <table>
+        <tr>
+            <th>Total Days Allocated</th>
+            <th>Feb Days</th>
+            <th>Mar Days</th>
+            <th>Apr Days</th>
+            <th>May Days</th>
+            <th>June Days</th>
+            <th>Remaining Days</th>
+        </tr>
+        {% for deliverable in agreed_deliverables %}
+        <tr>
+            <td>{{ deliverable.total_days_allocated }}</td>
+            <td>{{ deliverable.feb_days }}</td>
+            <td>{{ deliverable.mar_days }}</td>
+            <td>{{ deliverable.apr_days }}</td>
+            <td>{{ deliverable.may_days }}</td>
+            <td>{{ deliverable.june_days }}</td>
+            <td>{{ deliverable.remaining_days }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+     <h3>Delivered this period – February 2023</h3>
+    <table id="delivered-this-period">
+        <tr>
+            <th>Programme/project/work area</th>
+            <th>Output</th>
+            <th>Value to Trust</th>
+        </tr>
+        {% for delivery in delivered_this_period %}
+            <tr>
+                <td><input type="text" class="editable-field" data-field="work_area" value="{{ delivery.work_area }}"></td>
+                <td><input type="text" class="editable-field" data-field="output" value="{{ delivery.output }}"></td>
+                <td><input type="text" class="editable-field" data-field="value_to_trust" value="{{ delivery.value_to_trust }}"></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Relevant dependencies on ability to deliver</h3>
+    <table id="relevant-dependencies">
+        <tr>
+            <th>Dependency</th>
+            <th>RAG</th>
+        </tr>
+        {% for dependency in dependencies %}
+            <tr>
+                <td><input type="text" class="editable-field" data-field="dependency" value="{{ dependency.dependency }}"></td>
+                <td><input type="text" class="editable-field" data-field="rag" value="{{ dependency.rag }}"></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Comments / feedback to share / note</h3>
+    <textarea id="comments">{{ comments }}</textarea>
+
+<button id="update-btn">Update</button>
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const updateButton = document.getElementById('update-btn');
+
+    if (!updateButton) {
+        console.error('Update button not found');
+        return;
+    }
+
+    updateButton.addEventListener('click', function() {
+        console.log('Update button clicked');
+
+        const updatedDeliveries = [];
+
+        // Gather values from editable fields
+        const rows = document.querySelectorAll('#delivered-this-period tr');
+
+        if (!rows.length) {
+            console.error('No rows found');
+            return;
+        }
+
+        rows.forEach(row => {
+            const workAreaInput = row.querySelector('[data-field="work_area"]');
+            const outputInput = row.querySelector('[data-field="output"]');
+            const valueToTrustInput = row.querySelector('[data-field="value_to_trust"]');
+
+            if (!workAreaInput || !outputInput || !valueToTrustInput) {
+                console.error('Input field not found in row');
+                return;
+            }
+
+            const workArea = workAreaInput.value;
+            const output = outputInput.value;
+            const valueToTrust = valueToTrustInput.value;
+
+            updatedDeliveries.push({
+                work_area: workArea,
+                output: output,
+                value_to_trust: valueToTrust
+            });
+        });
+
+        console.log('Updated deliveries:', updatedDeliveries);
+
+        // Send data to backend
+        fetch('/update_delivered_this_period', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedDeliveries),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Server response:', data);
+            if (data.message === 'Data updated successfully') {
+                console.log('Data updated successfully');
+            } else {
+                console.log('Failed to update data');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating data:', error);
+        });
+    });
+});
+
+</script>

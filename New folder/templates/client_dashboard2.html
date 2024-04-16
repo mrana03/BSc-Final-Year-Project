@@ -1,0 +1,174 @@
+<!-- client_dashboard2.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Delivery Report Dashboard</title>
+    <style>
+        /* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #666;
+    margin-top: 40px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Button style */
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Monthly Delivery Report Dashboard</h1>
+
+    <h2>Consultant Details</h2>
+    <table>
+        <tr>
+            <th>Project Number</th>
+            <th>Client</th>
+            <th>Consultant</th>
+            <th>Directorate</th>
+            <th>Programme Area</th>
+        </tr>
+        <tr>
+            <td>{{ project_data.project_number }}</td>
+            <td>{{ project_data.client }}</td>
+            <td>{{ project_data.consultant }}</td>
+            <td>{{ project_data.directorate }}</td>
+            <td>{{ project_data.programme_area }}</td>
+        </tr>
+    </table>
+
+    <h2>Delivery Metrics</h2>
+    <table>
+        <tr>
+            <th>Total Days Delivered (This Month)</th>
+            <th>Overall Deliverables Status</th>
+        </tr>
+        <tr>
+            <td>{{ delivery_metrics.total_days_delivered }}</td>
+            <td>{{ delivery_metrics.overall_deliverables_status }}</td>
+        </tr>
+    </table>
+
+    <h2>Consultancy Allocation</h2>
+    <table>
+        <tr>
+            <th>Total Allocated Days</th>
+            <th>Remaining Days</th>
+        </tr>
+        <tr>
+            <td>{{ consultancy_allocation.total_allocated_days }}</td>
+            <td>{{ consultancy_allocation.remaining_days }}</td>
+        </tr>
+    </table>
+
+    <h2>Deliverables Breakdown</h2>
+    <table>
+        <tr>
+            <th>Delivery Areas</th>
+            <th>Feb Days</th>
+            <th>Mar Days</th>
+            <th>Apr Days</th>
+            <th>May Days</th>
+            <th>June Days</th>
+            <th>Remaining Days</th>
+        </tr>
+        {% for data in deliverables_breakdown %}
+        <tr>
+            <td>{{ data.delivery_area }}</td>
+            <td>{{ data.feb_days }}</td>
+            <td>{{ data.mar_days }}</td>
+            <td>{{ data.apr_days }}</td>
+            <td>{{ data.may_days }}</td>
+            <td>{{ data.june_days }}</td>
+            <td>{{ data.remaining_days }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Dependencies</h2>
+    <table>
+        <tr>
+            <th>Relevant Dependencies Status</th>
+        </tr>
+        <tr>
+            <td>{{ dependencies.relevant_dependencies_status }}</td>
+        </tr>
+    </table>
+
+    <h2>Delivered in [Month Year]</h2>
+    <p>{{ delivered_in_month }}</p>
+
+    <h2>Programme/Project/Work Area Output</h2>
+    <table>
+        <tr>
+            <th>Programme/Project/Work Area</th>
+            <th>Output</th>
+            <th>Value to Trust</th>
+        </tr>
+        {% for item in output_data %}
+        <tr>
+            <td>{{ item.work_area }}</td>
+            <td>{{ item.output }}</td>
+            <td>{{ item.value_to_trust }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Comments/Feedback</h2>
+    <p>{{ comments_feedback.comments }}</p>
+
+    <h2>Summary</h2>
+    <p>The consultancy is currently {{ summary.track_status }} with {{ summary.total_days_delivered }} delivered in [Month Year].</p>
+    <p>Remaining days are allocated for upcoming deliverables.</p>
+    <p>Dependencies are {{ dependencies.relevant_dependencies_status }}, indicating a {% if summary.dependencies_status == 'Positive' %}Positive{% else %}Negative{% endif %} status.</p>
+</body>
+</html>

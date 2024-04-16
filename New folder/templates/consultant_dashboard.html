@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultant Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <p>Hello {{ current_user.username }},</p>
+
+    {% if not consultant.agreement_signed %}
+        <p><strong>You have not signed the agreement yet.</strong></p>
+        <form action="{{ url_for('upload_agreement') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file">
+            <input type="submit" value="Upload Signed Agreement">
+        </form>
+        <p>Or you can <a href="{{ url_for('agreement') }}" target="_blank">download the agreement</a> and upload the signed copy.</p>
+    {% else %}
+        <p>You have signed the agreement. You can proceed with your tasks.</p>
+    {% endif %}
+</body>
+</html>
